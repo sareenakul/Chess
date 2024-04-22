@@ -6,7 +6,7 @@
 // }
 
 import { WebSocket } from "ws";
-import { INIT_GAME } from "./message";
+import { INIT_GAME, MOVE } from "./message";
 import { Game } from "./Game";
 
 export class ChessManager {
@@ -32,6 +32,7 @@ export class ChessManager {
     private addHandler(socket : WebSocket){
         socket.on("message", (data) =>{
             const message = JSON.parse(data.toString());
+
             //initiallizes the game
             if(message.type === INIT_GAME){
                 //checks if there exists a pending user at moment
@@ -46,6 +47,16 @@ export class ChessManager {
                 //If no then declare the socket as the pendingUser.
                 else{
                     this.pendingUser = socket;
+                }
+            }
+
+            //When Socket plays a Move
+            if(message.type === MOVE){
+                //assigns a game that is being played by the socket.
+                const game = this.games.find(game => game.player1 === socket || game.player2 === socket);
+                //If such a game exists then make the move by the socket
+                if(game){
+                    game.makeMove(socket, message.move);
                 }
             }
         })
