@@ -8,12 +8,14 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element = {<Landing/>}/>
-        <Route path="/game" element = {<Game/>}/>
-      </Routes>
-    </BrowserRouter>
+    <div className='mainApp'>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element = {<Landing/>}/>
+          <Route path="/game" element = {<Game/>}/>
+        </Routes>
+      </BrowserRouter>
+    </div>
   )
 }
 

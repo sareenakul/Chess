@@ -2,9 +2,10 @@
 
 /* Container styles */
 .landing-container {
-    margin-top: 2rem;
+    /* padding-top: 8rem; */
     display: flex;
     justify-content:flex-start;
+    padding: 8rem;
   }
   
   /* Grid styles */
@@ -17,7 +18,7 @@
   .grid-item {
     display: flex;
     flex-direction: column;
-    justify-content:space-around;
+    justify-content:center;
   }
 
   
@@ -26,11 +27,14 @@
   .grid-item h1 {
     font-size: 2.25rem;
     font-weight: bold;
+    color: rgb(228, 215, 215);
   }
 
   .grid-item img{
     display: flex;
     justify-content:center;
+    max-width: 500px;
+    margin: 1rem;
   }
 
 
