@@ -1,6 +1,6 @@
 import React from "react";
 import board from "../assets/board.png";
-import "./Landing.css";
+import "./landing.css";
 
 const Landing = () => {
   return (
