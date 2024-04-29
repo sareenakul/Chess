@@ -1,11 +1,16 @@
 /* Landing.css */
 
 /* Container styles */
+.store{
+  display: flex;
+  justify-content: center;
+}
 .landing-container {
     /* padding-top: 8rem; */
-    display: flex;
-    justify-content:flex-start;
+    /* display: flex;
+    justify-content:flex-start; */
     padding: 8rem;
+    max-width:fit-content;
   }
   
   /* Grid styles */
@@ -18,7 +23,12 @@
   .grid-item {
     display: flex;
     flex-direction: column;
-    justify-content:center;
+    padding-top: 16px;
+  }
+
+  .grid-item .sec{
+    display: flex;
+    justify-content: center;
   }
 
   
@@ -41,19 +51,22 @@
   
   /* Button styles */
   .button-container {
-    margin-top: 1rem;
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+
   }
   
   .play-button {
-    background-color: #3b82f6;
+    background-color: #1a844b;
     color: #fff;
     font-weight: bold;
-    padding: 0.5rem 1rem;
+    padding: 3rem;
     border: none;
     border-radius: 0.25rem;
   }
   
   .play-button:hover {
-    background-color: #2563eb;
+    background-color: #1e6e3f;
   }
   
