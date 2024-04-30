@@ -10,7 +10,8 @@ export const GAME_OVER = "game_over";
 
 export const Game = () =>{
     const socket = useSocket();
-    const [board, setBoard] = useState(new Chess());
+    const [chess, setChess] = useState(new Chess());
+    const [board, setBoard] = useState(chess.board());
 
     useEffect(() =>{
         if(!socket){
@@ -18,15 +19,17 @@ export const Game = () =>{
         }
         socket.onmessage = (event) =>{
             const message = JSON.parse(event.data);
-            console.log(message);
+            
             switch(message.type){
                 case INIT_GAME:
-                    setBoard(new Chess());
+                    setChess(new Chess());
+                    setBoard(chess.board());
                     console.log("Game Initialized");
                     break;
                 case MOVE:
                     const move = message.payload;
-                    board.move(move);
+                    chess.move(move);
+                    setBoard(chess.board());
                     console.log("Played Move");
                     break;
                 case GAME_OVER:
@@ -40,24 +43,21 @@ export const Game = () =>{
             <div>Connecting...</div>
         )
     }
-    return(
-        <div className="justify-center flex">
-            <div className="pt-8 max-w-screen-lg w-full">
-                <div className="grid grid-cols-6 gap-4 w-full">
-                    <div className="col-span-4 bg-red-400 w-full">
-                        <Chessboard/>
-                    </div>
-                    <div className="col-span-2 bg-green-400 w-full">
-                        <PlayButton onClick={()=> {
-                            socket.send(JSON.stringify({
-                                type: INIT_GAME,
-
-                            }))}}>
+    return <div className="justify-center flex">
+                <div className="pt-8 max-w-screen-lg w-full">
+                    <div className="grid grid-cols-6 gap-4 w-full">
+                        <div className="col-span-4 w-full flex justify-center">
+                            <Chessboard board={board}/>
+                        </div>
+                        <div className="col-span-2 bg-green-400 w-full">
+                            <PlayButton onClick={()=> {
+                                socket.send(JSON.stringify({
+                                    type: INIT_GAME,
+                                }))}}>
                                 <h1>Play</h1>
-                        </PlayButton>
+                            </PlayButton>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
 };
