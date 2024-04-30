@@ -1,5 +1,6 @@
 import { Color, PieceSymbol, Square } from "chess.js";
 import { useState } from "react";
+import { MOVE } from "../Pages/Game";
 
 export const Chessboard = ({board, socket} : {
     board: ({
@@ -10,12 +11,34 @@ export const Chessboard = ({board, socket} : {
     socket: WebSocket;
 }) =>{
     //continue from here after qula
-    const [from, setFrom] = useState();
+    const [from, setFrom] = useState<null | Square>(null);
+    const [to, setTo] = useState<null | Square>(null);
     return <div className="text-white-200">
             {board.map((row,i) =>{
                 return <div key={i} className="flex">
                     {row.map((square, j) =>{
-                        return <div key={j} className={`w-16 h-16 ${(i+j)%2 === 0 ? 'bg-red-500' : 'bg-white'}`}>
+                        const squareRep = String.fromCharCode(65 + (j % 8)) + "" + (8 - i) as Square;
+                        // console.log(squareRep);
+                        return <div onClick={() => {
+                            if(!from){
+                                setFrom(squareRep);
+                            }
+                            else{
+                                // setTo(square?.square ?? null);
+                                socket.send(JSON.stringify({
+                                    type: MOVE,
+                                    payload: {
+                                        from,
+                                        to: squareRep
+                                    }
+                                }))
+                                setFrom(null);
+                                console.log({
+                                    from,
+                                    to: squareRep
+                                })
+                            }
+                        }} key={j} className={`w-16 h-16 ${(i+j)%2 === 0 ? 'bg-red-500' : 'bg-white'}`}>
                             <div className="w-full justify-center flex h-full">
                                 <div className="h-full justify-center flex flex-col">
                                 {square ? square.type : ""}
