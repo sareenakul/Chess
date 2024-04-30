@@ -1,6 +1,18 @@
 import { Chessboard } from "../Components/Chessboard";
+import { PlayButton } from "../Components/PlayButton";
+import { useSocket } from "../Hooks/useSocket";
+
+export const INIT_GAME = "init_game";
+export const MOVE = "move";
+export const GAME_OVER = "game_over";
 
 export const Game = () =>{
+    const socket = useSocket();
+    if(!socket){
+        return(
+            <div>Connecting...</div>
+        )
+    }
     return(
         <div className="justify-center flex">
             <div className="pt-8 max-w-screen-lg w-full">
@@ -9,7 +21,13 @@ export const Game = () =>{
                         <Chessboard/>
                     </div>
                     <div className="col-span-2 bg-green-400 w-full">
-                        <button>Play</button>
+                        <PlayButton onClick={()=> {
+                            socket.send(JSON.stringify({
+                                type: INIT_GAME,
+                                
+                            }))}}>
+                                <h1>Play</h1>
+                        </PlayButton>
                     </div>
                 </div>
             </div>
