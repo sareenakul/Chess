@@ -2,7 +2,9 @@ import { Color, PieceSymbol, Square } from "chess.js";
 import { useState } from "react";
 import { MOVE } from "../Pages/Game";
 
-export const Chessboard = ({board, socket} : {
+export const Chessboard = ({ chess, board, socket, setBoard} : {
+    chess: any;
+    setBoard: any;
     board: ({
         square: Square;
         type: PieceSymbol;
@@ -17,7 +19,7 @@ export const Chessboard = ({board, socket} : {
             {board.map((row,i) =>{
                 return <div key={i} className="flex">
                     {row.map((square, j) =>{
-                        const squareRep = String.fromCharCode(65 + (j % 8)) + "" + (8 - i) as Square;
+                        const squareRep = String.fromCharCode(97 + (j % 8)) + "" + (8 - i) as Square;
                         // console.log(squareRep);
                         return <div onClick={() => {
                             if(!from){
@@ -33,6 +35,11 @@ export const Chessboard = ({board, socket} : {
                                     }
                                 }))
                                 setFrom(null);
+                                chess.move({
+                                    from,
+                                    to: squareRep
+                                });
+                                setBoard(chess.board())
                                 console.log({
                                     from,
                                     to: squareRep
