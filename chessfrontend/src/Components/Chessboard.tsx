@@ -14,7 +14,7 @@ export const Chessboard = ({ chess, board, socket, setBoard} : {
 }) =>{
     //continue from here after qula
     const [from, setFrom] = useState<null | Square>(null);
-    const [to, setTo] = useState<null | Square>(null);
+    // const [to, setTo] = useState<null | Square>(null);
     return <div className="text-white-200">
             {board.map((row,i) =>{
                 return <div key={i} className="flex">
@@ -30,8 +30,10 @@ export const Chessboard = ({ chess, board, socket, setBoard} : {
                                 socket.send(JSON.stringify({
                                     type: MOVE,
                                     payload: {
-                                        from,
-                                        to: squareRep
+                                        move: {
+                                            from,
+                                            to: squareRep
+                                        }
                                     }
                                 }))
                                 setFrom(null);
