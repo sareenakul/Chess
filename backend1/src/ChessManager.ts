@@ -56,7 +56,7 @@ export class ChessManager {
                 const game = this.games.find(game => game.player1 === socket || game.player2 === socket);
                 //If such a game exists then make the move by the socket
                 if(game){
-                    game.makeMove(socket, message.move);
+                    game.makeMove(socket, message.payload.move);
                 }
             }
         })
