@@ -43,5 +43,8 @@ Contributions to Akul's Chess are welcome! Feel free to submit bug reports, feat
 - **Chess.js Library**: [GitHub](https://github.com/jhlywa/chess.js/blob/master/README.md)
 - **Custom Chess Pieces**: [Figma Community](https://www.figma.com/community/file/971870797656870866)
 
+## Licences
+[creativecommons](https://creativecommons.org/licenses/by/4.0/)
+
 
 Thank you for checking out Akul's Chess! Enjoy playing and happy coding! 🎉
