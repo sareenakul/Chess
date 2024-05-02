@@ -1,6 +1,6 @@
 # Akul's Chess
 
-![Chess Board](images/chess_board.png)
+![Chess Board](https://media.licdn.com/dms/image/D562DAQHCc_fL3oVM1g/profile-treasury-image-shrink_160_160/0/1714481985497?e=1715223600&v=beta&t=GWpxJHixkBAkkwIrwvChC6h7qIYiHWzOj9sN24twXQU)
 
 ## Introduction
 
